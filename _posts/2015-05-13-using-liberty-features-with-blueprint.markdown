@@ -31,7 +31,7 @@ When called, this method creates an instance of the service, associates it with 
 
 Now lets look at the Liberty feature manifest, SUBSYSTEM.MF.  The contents of this file are documented on the Infocenter and this file can be generated for you by the WebSphere Development Tools.
 
-```
+```yaml
     Subsystem-ManifestVersion: 1.0
     IBM-Feature-Version: 2
     IBM-ShortName: exampleFeature-1.0
@@ -44,6 +44,6 @@ Now lets look at the Liberty feature manifest, SUBSYSTEM.MF.  The contents of th
     IBM-API-Service: org.example.liberty.service.HelloWorld
 ```
 
-The notable lines here are the last three.  +Subsystem-Content+ references the name of the OSGi Bundle containing the feature code.  +IBM-API-Package+ is a comma separated list of Java packages which should be made available to the ClassLoaders of deployed applications.  And finally, +IBM-API-Service+ is a comma separated list of Java Interfaces which should be exposed as OSGi services to deployed applications.
+The notable lines here are the last three.  *Subsystem-Content* references the name of the OSGi Bundle containing the feature code.  *IBM-API-Package* is a comma separated list of Java packages which should be made available to the ClassLoaders of deployed applications.  And finally, *IBM-API-Service* is a comma separated list of Java Interfaces which should be exposed as OSGi services to deployed applications.
 
 
