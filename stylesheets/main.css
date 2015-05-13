@@ -117,10 +117,6 @@ table.post-list tr:last-child td, table.post-list tr:last-child th {
   text-align: center;
 }
 
-.home_box {
-  float: left;
-}
-
 #content .home_box h2 {
   background: #417378;
   padding: 0.3em 0.5em;
