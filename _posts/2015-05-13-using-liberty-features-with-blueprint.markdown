@@ -29,7 +29,7 @@ The SPI feature consists of three Java files and associated bundle and feature m
 
 When called, this method creates an instance of the service, associates it with the service interface, and registers it into the OSGi Service Registry.
 
-Now lets look at the Liberty feature manifest, SUBSYSTEM.MF.  The contents of this file are documented on the Infocenter and this file can be generated for you by the WebSphere Development Tools.
+Now lets look at the Liberty feature manifest, **SUBSYSTEM.MF**.  The contents of this file are documented on the Infocenter and this file can be generated for you by the WebSphere Development Tools.
 
 ```yaml
     Subsystem-ManifestVersion: 1.0
@@ -44,6 +44,18 @@ Now lets look at the Liberty feature manifest, SUBSYSTEM.MF.  The contents of th
     IBM-API-Service: org.example.liberty.service.HelloWorld
 ```
 
-The notable lines here are the last three.  *Subsystem-Content* references the name of the OSGi Bundle containing the feature code.  *IBM-API-Package* is a comma separated list of Java packages which should be made available to the ClassLoaders of deployed applications.  And finally, *IBM-API-Service* is a comma separated list of Java Interfaces which should be exposed as OSGi services to deployed applications.
+The notable lines here are the last three.  **Subsystem-Content** references the name of the OSGi Bundle containing the feature code.  **IBM-API-Package** is a comma separated list of Java packages which should be made available to the ClassLoaders of deployed applications.  And finally, **IBM-API-Service** is a comma separated list of Java Interfaces which should be exposed as OSGi services to deployed applications.
 
+For the consumer, the most interesting thing is the blueprint.xml.  When the consumer application is deployed, Liberty processes the blueprint.xml file and creates the consumer components and injects the references to the service interface published by the SPI feature.  Here is the blueprint.xml for this example application.
 
+```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" >
+      <reference id="helloService" interface="org.example.liberty.service.HelloWorld"/>
+      <bean id="helloClientBean" class="org.example.liberty.client.HelloClient" activation="eager" init-method="init" destroy-method="destroy" >
+  	    <property name="helloWorld" ref="helloService" />
+      </bean>
+</blueprint>
+```
+
+When processed, the **<bean>** stanza causes Blueprint to create an instance of the consumer while the enclosed **<property>** element asks Blueprint to inject an instance of the helloService.  In the **<reference>** element the helloService is defined to have a service interface of org.example.liberty.service.HelloWorld which matches the interface we exposed in **IBM-API-Service** in the SUBSYSTEM.MF above.
