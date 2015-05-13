@@ -31,7 +31,7 @@ When called, this method creates an instance of the service, associates it with 
 
 Now lets look at the Liberty feature manifest, **SUBSYSTEM.MF**.  The contents of this file are documented on the Infocenter and this file can be generated for you by the WebSphere Development Tools.
 
-```make
+```
     Subsystem-ManifestVersion: 1.0
     IBM-Feature-Version: 2
     IBM-ShortName: exampleFeature-1.0
