@@ -56,7 +56,7 @@ For the consumer, the most interesting thing is the blueprint.xml.  When the con
          activation="eager" init-method="init" destroy-method="destroy" >
   	    <property name="helloWorld" ref="helloService" />
       </bean>
-</blueprint>
+    </blueprint>
 ```
 
 When processed, the **<bean>** stanza causes Blueprint to create an instance of the consumer while the enclosed **<property>** element asks Blueprint to inject an instance of the helloService.  In the **<reference>** element the helloService is defined to have a service interface of org.example.liberty.service.HelloWorld which matches the interface we exposed in **IBM-API-Service** in the SUBSYSTEM.MF above.
