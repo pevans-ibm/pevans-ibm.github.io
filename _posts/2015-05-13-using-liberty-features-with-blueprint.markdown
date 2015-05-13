@@ -4,10 +4,10 @@ This is a Blog Post
 cool.
 
 
-'''java
+```java
 public class RandomPost{
     static final String hello = "World";
 }
-'''
+```
 
 the end.
