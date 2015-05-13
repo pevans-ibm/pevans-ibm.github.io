@@ -1,3 +1,9 @@
+---
+layout: master
+tile: Blog
+full_posts: 3
+---
+
 Accessing Custom Liberty Feature Service Interfaces via Injection
 ===================
 
@@ -5,7 +11,7 @@ For a few releases now IBM Webpshere Liberty Profile has been available as light
 
 After embracing Enterprise OSGi applications in Liberty, often you reach a point where you want one EBA application to provide services to the other EBA applications.  A common use case would be a configuration service or some other kind of resource broker.  Unfortunately in these cases, each EBA application is isolated from the others and its services are not visible to them.  Starting with Liberty 8.5.x you can overcome this issue using its Service Provider Interface.  This interface is well documented in the IBM infocenter [here] (http://www-01.ibm.com/support/knowledgecenter/SSEQTP_8.5.5/com.ibm.websphere.wlp.core.doc/ae/twlp_feat_develop.html).
 
-While I have been aware of this capability for some time, it was not until discussing a configuration broker service with Graham Charters that I realized that SPI features could have their service interfaces injected into EBA applications using Blueprint.  In the course of my day job, this pattern has emerged a few times so I thought it would be good to share the know how and concept broadly.
+While I have been aware of this capability for some time, it was not until discussing a configuration broker service with IBM's Graham Charters that I realized that SPI features could have their service interfaces injected into EBA applications using Blueprint.  In the course of my day job, this pattern has emerged a few times so I thought it would be good to share the know how and concept broadly.
 
 I developed the example service and consumer detailed below using Eclipse 4.4 Luna with the [Websphere Development Tools](https://developer.ibm.com/assets/wasdev/#filter/sortby=relevance;q=Websphere%20Developer%20Tools) plugin(s) installed.  It is possible to do it without the plugins, but they do keep out of a bit of trouble by generating some of the manifests for you.  Included in the example is an Ant build file which packages up the artifacts for deployment without relying on any plugins.
 
