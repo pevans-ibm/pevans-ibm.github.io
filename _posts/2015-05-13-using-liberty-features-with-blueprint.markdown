@@ -67,7 +67,7 @@ For the consumer, the most interesting thing is the blueprint.xml.  When the con
 
 When processed, the **`<bean>`** stanza causes Blueprint to create an instance of the consumer while the enclosed **`<property>`** element asks Blueprint to inject an instance of the helloService.  In the **`<reference>`** element the helloService is defined to have a service interface of org.example.liberty.service.HelloWorld which matches the interface we exposed in **IBM-API-Service** in the SUBSYSTEM.MF above.
 
-To deploy these artifacts, an ESA file and an EBA file are created.  The EBA file contains the consumer application and the ESA file contains the feature or subsystem.  The application can be deployed either as a dropin or using an `<application>` directive in Liberty's server.xml.  The ESA file is deployed using the **featureManager** command included in the Liberty **bin** directory.
+To deploy these artifacts, an ESA file and an EBA file are created.  The EBA file contains the consumer application and the ESA file contains the feature or subsystem.  The application can be deployed either as a dropin or using an **`<application>`** directive in Liberty's server.xml.  The ESA file is deployed using the **featureManager** command included in the Liberty **bin** directory.
 
 I have exported the Eclipse project containing everything required to build and run the example.  It is available at this [link](/downloads/org.example.zip).  I hope that you find this technique useful in your Liberty Profile based solutions.
 
