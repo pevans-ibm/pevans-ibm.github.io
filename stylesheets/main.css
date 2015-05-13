@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: #CCCCCC;
+  background: #B2B2B2;
   color: #6C6E58;
 }
 
@@ -34,7 +34,7 @@ a:visited {
 #header {
   text-transform: lowercase;
   text-align: left;
-  background: #CCCCCC;
+  background: #417378;
   -moz-border-radius-topleft: 1em;
   -webkit-border-top-left-radius: 1em;
   -moz-border-radius-topright: 1em;
