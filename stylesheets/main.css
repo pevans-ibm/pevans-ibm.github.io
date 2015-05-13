@@ -81,3 +81,12 @@ a:visited {
   line-height: 2.5em;  
   font-weight: normal;
 }
+
+div.post {
+  margin-bottom: 2em;
+}
+
+table.post-list tr:last-child td, table.post-list tr:last-child th {
+  border-bottom: 0;
+}
+
