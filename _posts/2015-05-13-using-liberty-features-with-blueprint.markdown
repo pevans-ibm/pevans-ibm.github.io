@@ -8,3 +8,42 @@ After embracing Enterprise OSGi applications in Liberty, often you reach a point
 While I have been aware of this capability for some time, it was not until discussing a configuration broker service with Graham Charters that I realized that SPI features could have their service interfaces injected into EBA applications using Blueprint.  In the course of my day job, this pattern has emerged a few times so I thought it would be good to share the know how and concept broadly.
 
 I developed the example service and consumer detailed below using Eclipse 4.4 Luna with the [Websphere Development Tools](https://developer.ibm.com/assets/wasdev/#filter/sortby=relevance;q=Websphere%20Developer%20Tools) plugin(s) installed.  It is possible to do it without the plugins, but they do keep out of a bit of trouble by generating some of the manifests for you.  Included in the example is an Ant build file which packages up the artifacts for deployment without relying on any plugins.
+
+The SPI feature consists of three Java files and associated bundle and feature manifests.  One java file, HelloWorld.java defines the Service Interface while another, HelloWorldImpl.java implements the interface.  The third Java file, Activator.java, is the interesting one; it is the OSGi Bundle Activator which will be called by Liberty when it is time to start and stop the service.  On startup, it creates an instance of the service and registers it into the service registry in Liberty.  The startup method is shown below.
+
+```java
+	/*
+	 * (non-Javadoc)
+	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+	 */
+	public void start(BundleContext bundleContext) throws Exception {
+		Activator.context = bundleContext;
+		Hashtable<String,String> metadata = new Hashtable<String,String>();
+		metadata.put("service.description","Example hello Liberty SPR Blueprint Service");
+		metadata.put("service.vendor", "example.org");
+		String[] interfaces = {HelloWorld.class.getName()};
+		registration = context.registerService(interfaces, new HelloWorldImpl(), metadata);
+		System.out.println("HelloWorld service registered to OSGi");
+	}
+```
+
+When called, this method creates an instance of the service, associates it with the service interface, and registers it into the OSGi Service Registry.
+
+Now lets look at the Liberty feature manifest, SUBSYSTEM.MF.  The contents of this file are documented on the Infocenter and this file can be generated for you by the WebSphere Development Tools.
+
+```
+    Subsystem-ManifestVersion: 1.0
+    IBM-Feature-Version: 2
+    IBM-ShortName: exampleFeature-1.0
+    Subsystem-SymbolicName: org.example.liberty.feature;visibility:=public
+    Subsystem-Version: 1.0.0
+    Subsystem-Type: osgi.subsystem.feature
+    Manifest-Version: 1.0
+    Subsystem-Content: org.example.liberty.service;version=1.0.0
+    IBM-API-Package: org.example.liberty.service;type="api"
+    IBM-API-Service: org.example.liberty.service.HelloWorld
+```
+
+The notable lines here are the last three.  +Subsystem-Content+ references the name of the OSGi Bundle containing the feature code.  +IBM-API-Package+ is a comma separated list of Java packages which should be made available to the ClassLoaders of deployed applications.  And finally, +IBM-API-Service+ is a comma separated list of Java Interfaces which should be exposed as OSGi services to deployed applications.
+
+
