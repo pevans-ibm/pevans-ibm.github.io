@@ -86,7 +86,54 @@ div.post {
   margin-bottom: 2em;
 }
 
+table.post-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.post-list a {
+  color: #262;
+  font-weight: bold;
+}
+
+table.post-list th {
+  text-align: left;
+}
+
+table.post-list td, table.post-list th {
+  padding: 0.5em 0.3em;
+  border-bottom: 1px solid #dba;
+}
+
 table.post-list tr:last-child td, table.post-list tr:last-child th {
   border-bottom: 0;
 }
 
+#footer {
+  margin-bottom: 2em;
+  color: #3E423A;
+  font-size: 0.9em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.home_box {
+  float: left;
+}
+
+#content .home_box h2 {
+  background: #417378;
+  padding: 0.3em 0.5em;
+  border-bottom: 3px solid #255;
+  margin-bottom: 0em;
+  color: white;
+}
+
+.home_box h2 a {
+  color: white;
+  margin: 0 0.2em;
+}
+
+#home_left {
+  width: 29em;
+}
